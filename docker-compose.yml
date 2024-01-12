@@ -8,14 +8,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./:/usr/src/app
-
-  web-cli:
-    image: api-server
-    networks:
-      - backend
-    command: sh
-
+      - ./Server:/usr/src/app
 networks:
   backend:
     driver: bridge

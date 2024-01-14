@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   api-server:
     image: api-server
     build: ./Server
@@ -9,6 +10,20 @@ services:
       - "3000:3000"
     volumes:
       - ./Server:/usr/src/app
+
+  postgres:
+    image: postgres:14-alpine
+    networks:
+      - backend
+    ports:
+      - 5432:5432
+    volumes:
+      - ./DB/scripts/create.sql:/docker-entrypoint-initdb.d/create.sql
+    environment:
+      - POSTGRES_PASSWORD=pgpass
+      - POSTGRES_USER=pguser
+      - POSTGRES_DB=pgdb
+
 networks:
   backend:
     driver: bridge

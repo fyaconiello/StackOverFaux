@@ -3,26 +3,33 @@ services:
 
   api-server:
     image: api-server
-    build: ./Server
+    build:
+      context: ./Server
+      args:
+        SERVER_PORT: "${SERVER_PORT}"
+    env_file: .env
     networks:
       - backend
     ports:
-      - "3000:3000"
+      - "${SERVER_PORT}:${SERVER_PORT}"
     volumes:
       - ./Server:/usr/src/app
 
   postgres:
     image: postgres:14-alpine
+    env_file: .env
     networks:
       - backend
     ports:
-      - 5432:5432
+      - "${DB_PORT}:5432"
     volumes:
-      - ./DB/scripts/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./DB/scripts/00-stackoverfaux.json:/docker-entrypoint-initdb.d/00-stackoverfaux.json
+      - ./DB/scripts/01-create.sql:/docker-entrypoint-initdb.d/01-create.sql
+      - ./DB/scripts/02-ETL.sql:/docker-entrypoint-initdb.d/02-ETL.sql
     environment:
-      - POSTGRES_PASSWORD=pgpass
-      - POSTGRES_USER=pguser
-      - POSTGRES_DB=pgdb
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
 
 networks:
   backend:

@@ -16,7 +16,8 @@ create table if not exists questions
         constraint questions_users_id_fk
             references users,
     creation timestamp default now() not null,
-    score    integer   default 0     not null
+    score    integer   default 0     not null,
+    title    varchar(255)            not null
 );
 
 create table if not exists answers
@@ -52,4 +53,3 @@ create table if not exists comments
         constraint comments_questions_id_fk
             references questions
 );
-

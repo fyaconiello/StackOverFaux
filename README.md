@@ -11,10 +11,10 @@ Showcase proficiency in: Typescript, React, API design & development, ElasticSea
   - [ ] Connect to Postgres
   - [ ] Create CRUD endpoints
   - [ ] Add search endpoints
-- [ ] Initialize a Postgres db
-  - [ ] Create initial Schema
-  - [ ] Containerize
-  - [ ] Create ETL scripts to transform and load provided JSON 
+- [x] Initialize a Postgres db
+  - [x] Create initial Schema
+  - [x] Containerize
+  - [x] Create ETL scripts to transform and load provided JSON 
 - [ ] Create a React based frontend that utilizes endpoints defined in server
   - [ ] Research and utilize existing component library to quickly bootstrap UI
   - [ ] Implement endpoints from Server

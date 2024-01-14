@@ -1,17 +1,15 @@
 // src/index.ts
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
 import winston, {Logger} from "winston";
 
-dotenv.config();
+// Pull server settings from environment variables set in container.
+const port :number = Number(process.env.SERVER_PORT ?? 3000);
+const host :string = process.env.SERVER_HOST ?? "0.0.0.0";
 
-// Pull server settings from .env config.
-const port :number = Number(process.env.PORT ?? 3000);
-const host :string = process.env.HOST ?? "0.0.0.0";
-
+// Initialize Express app.
 const app :Express = express();
 
-// Set up logging.
+// Set up logging into buckets by log level + combined file.
 const logger :Logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
@@ -29,6 +27,7 @@ const logger :Logger = winston.createLogger({
     ],
 });
 
+// Add non-production console reporting.
 if ('production' !== process.env.NODE_ENV) {
     logger.add(new winston.transports.Console({
         format: winston.format.simple(),

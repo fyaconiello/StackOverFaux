@@ -67,7 +67,7 @@ FROM json_data,
      LATERAL jsonb_array_elements(q_element->'answers') AS a_element;
 
 ----
--- Extract questions' comments' user data from JSON
+-- Extract questions' comments' users data from JSON
 ----
 WITH json_data(file_content) AS (
     SELECT pg_read_file('/docker-entrypoint-initdb.d/00-stackoverfaux.json')::jsonb
@@ -84,7 +84,7 @@ ON CONFLICT (id) DO UPDATE
     SET name = EXCLUDED.name;
 
 ----
--- Extract questions' comments' data from JSON
+-- Extract questions' comments data from JSON
 ----
 WITH json_data(file_content) AS (
     SELECT pg_read_file('/docker-entrypoint-initdb.d/00-stackoverfaux.json')::jsonb
@@ -102,7 +102,7 @@ FROM json_data,
 
 
 ----
--- Extract answers' comments' user data from JSON
+-- Extract answers' comments' users data from JSON
 ----
 WITH json_data(file_content) AS (
     SELECT pg_read_file('/docker-entrypoint-initdb.d/00-stackoverfaux.json')::jsonb
@@ -120,7 +120,7 @@ ON CONFLICT (id) DO UPDATE
     SET name = EXCLUDED.name;
 
 ----
--- Extract questions' comments' data from JSON
+-- Extract answers' comments data from JSON
 ----
 WITH json_data(file_content) AS (
     SELECT pg_read_file('/docker-entrypoint-initdb.d/00-stackoverfaux.json')::jsonb

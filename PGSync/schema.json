@@ -1,0 +1,66 @@
+[
+  {
+    "database": "<database name>",
+    "index": "<index name>",
+    "nodes": {
+      "table": "questions",
+      "columns": [
+        "id",
+        "title",
+        "body",
+        "creation"
+      ],
+      "children": [
+        {
+          "table": "answers",
+          "columns": [
+            "id",
+            "body",
+            "accepted",
+            "creation"
+          ],
+          "relationship": {
+            "variant": "object",
+            "type": "one_to_many",
+            "foreign_key": {
+              "child": ["question_id"],
+              "parent": ["id"]
+            }
+          },
+          "children": [
+            {
+              "table": "comments",
+              "columns": [
+                "id",
+                "body"
+              ],
+              "relationship": {
+                "variant": "object",
+                "type": "one_to_many",
+                "foreign_key": {
+                  "child": ["answer_id"],
+                  "parent": ["id"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "table": "comments",
+          "columns": [
+            "id",
+            "body"
+          ],
+          "relationship": {
+            "variant": "object",
+            "type": "one_to_many",
+            "foreign_key": {
+              "child": ["question_id"],
+              "parent": ["id"]
+            }
+          }
+        }
+      ]
+    }
+  }
+]

@@ -18,5 +18,9 @@ Showcase proficiency in: Typescript, React, API design & development, ElasticSea
 - [ ] Create a React based frontend that utilizes endpoints defined in server
   - [ ] Research and utilize existing component library to quickly bootstrap UI
   - [ ] Implement endpoints from Server
-- [ ] Initialize Elasticsearch instance
-  - [ ] Set up indexing for Questions/Answers/Comments
+- [x] Initialize Elasticsearch instance
+  - [x] Set up indexing for Questions/Answers/Comments
+
+## Resources
+
+- https://liashchynskyi.net/posts/syncing-postgresql-tables-with-elasticsearch - pgsync tutorial

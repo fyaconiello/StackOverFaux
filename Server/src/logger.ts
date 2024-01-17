@@ -2,7 +2,7 @@
 import winston, {Logger} from "winston";
 
 // Set up logging into buckets by log level + combined file.
-export const logger :Logger = winston.createLogger({
+const logger :Logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
     defaultMeta: {
@@ -25,3 +25,5 @@ if ('production' !== process.env.NODE_ENV) {
         format: winston.format.simple(),
     }));
 }
+
+export default logger

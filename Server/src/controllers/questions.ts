@@ -3,7 +3,7 @@ import {
     Request,
     Response
 } from "express";
-import {logger} from "../logger";
+import logger from "../logger";
 import Question from "../models/Question";
 import User from "../models/User";
 
@@ -13,12 +13,19 @@ class QuestionController {
         try {
             // @ts-ignore this is set in custom pagination middleware.
             const {limit, offset} = req;
+            console.log("limit/offset", [limit, offset]);
             const questions: Question[] = await Question.findAll({
                 limit: limit,
                 offset: offset
             });
 
-            res.json(questions);
+            const total :number = await Question.count();
+
+            res.json({
+                'data': questions,
+                'num_records': questions.length as number,
+                'total_records': total as number
+            });
         } catch (error) {
             logger.error(error);
             res.status(500).json({error: 'Internal Server Error'});

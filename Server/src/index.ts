@@ -5,8 +5,8 @@ import express, {
     Response,
     Router
 } from "express";
-const logger = require("./logger");
-const questionRoutes :Router = require("./routes/questions");
+import logger from "./logger";
+import questionRoutes from "./routes/questions";
 
 // Pull server settings from environment variables set in container
 const port :number = Number(process.env.SERVER_PORT ?? 3000);
@@ -31,12 +31,14 @@ app.use((req: Request, res: Response, next) => {
     req.limit = parseInt(limit as string, 10);
     // @ts-ignore
     req.offset = (req.page - 1) * req.limit;
+
     next();
 });
 
 // Routes
 app.use("/questions", questionRoutes);
 
+// Begin listening
 app.listen(port, host, () :void => {
     logger.info(`[server]: Server is running at http://localhost:${port}`);
 });

@@ -6,16 +6,14 @@ import Question from './Question';
 
 class Answer extends Model {
     public body!: string;
-    public creation!: Date;
     public score!: number;
-    public userId!: number;
+    public user_id!: number;
     public id!: number;
     public accepted!: boolean;
-    public questionId!: number;
+    public question_id!: number;
 
     // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    public readonly creation!: Date;
 }
 
 Answer.init(
@@ -34,7 +32,7 @@ Answer.init(
             defaultValue: 0,
             allowNull: false,
         },
-        userId: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -43,20 +41,22 @@ Answer.init(
             defaultValue: false,
             allowNull: false,
         },
-        questionId: {
+        question_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
     },
     {
         sequelize,
+        timestamps: false,
         modelName: 'Answer',
+        tableName: 'answers'
     }
 );
 
-Answer.belongsTo(User, { foreignKey: 'userId' });
-User.hasMany(Answer, { foreignKey: 'userId' });
-Answer.belongsTo(Question, { foreignKey: 'questionId' });
-Question.hasMany(Answer, { foreignKey: 'questionId' });
+Answer.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Answer, { foreignKey: 'user_id' });
+Answer.belongsTo(Question, { foreignKey: 'question_id' });
+Question.hasMany(Answer, { foreignKey: 'question_id' });
 
 export default Answer;

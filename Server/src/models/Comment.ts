@@ -8,13 +8,9 @@ import Question from './Question';
 class Comment extends Model {
     public id!: number;
     public body!: string;
-    public userId!: number;
-    public answerId!: number;
-    public questionId!: number;
-
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    public user_id!: number;
+    public answer_id!: number;
+    public question_id!: number;
 }
 
 Comment.init(
@@ -32,26 +28,28 @@ Comment.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        answerId: {
+        answer_id: {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
-        questionId: {
+        question_id: {
             type: DataTypes.INTEGER,
             allowNull: true,
         },
     },
     {
         sequelize,
+        timestamps: false,
         modelName: 'Comment',
+        tableName: 'comments'
     }
 );
 
-Comment.belongsTo(User, { foreignKey: 'userId' });
-User.hasMany(Comment, { foreignKey: 'userId' });
-Comment.belongsTo(Answer, { foreignKey: 'answerId' });
-Answer.hasMany(Comment, { foreignKey: 'answerId' });
-Comment.belongsTo(Question, { foreignKey: 'questionId' });
-Question.hasMany(Comment, { foreignKey: 'questionId' });
+Comment.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Comment, { foreignKey: 'user_id' });
+Comment.belongsTo(Answer, { foreignKey: 'answer_id' });
+Answer.hasMany(Comment, { foreignKey: 'answer_id' });
+Comment.belongsTo(Question, { foreignKey: 'question_id' });
+Question.hasMany(Comment, { foreignKey: 'question_id' });
 
 export default Comment;

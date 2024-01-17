@@ -4,10 +4,6 @@ import { sequelize } from '../db';
 class User extends Model {
     public id!: number;
     public name!: string;
-
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
 }
 
 User.init(
@@ -25,7 +21,9 @@ User.init(
     },
     {
         sequelize,
+        timestamps: false,
         modelName: 'User',
+        tableName: 'users'
     }
 );
 
